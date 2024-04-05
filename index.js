@@ -88,6 +88,7 @@ ElevenLabs.prototype.textToSpeech = async function({
                 Accept: "audio/mpeg",
                 "xi-api-key": this.apiKey,
                 "Content-Type": "application/json",
+                "Athourization": `Bearer ${this.apiKey}`
             },
             responseType: "stream",
 
