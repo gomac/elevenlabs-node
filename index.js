@@ -69,6 +69,8 @@ ElevenLabs.prototype.textToSpeech = async function({
         const similarityBoostValue = similarityBoost ? similarityBoost : 0;
         const styleValue = style ? style : 0;
 
+        try {
+            console.log("CALLING AXIOS: ")
         const response = await axios({
             method: "POST",
             url: voiceURL,
@@ -88,6 +90,7 @@ ElevenLabs.prototype.textToSpeech = async function({
                 "Content-Type": "application/json",
             },
             responseType: "stream",
+
         });
 
         response.data.pipe(fs.createWriteStream(fileName));
@@ -104,6 +107,9 @@ ElevenLabs.prototype.textToSpeech = async function({
 
             writeStream.on('error', reject);
         });
+    } catch (err) {
+        console.log("ERROR IN AXIOS: ", err)
+    }
     } catch (error) {
         console.log(error);
     }
@@ -151,6 +157,8 @@ ElevenLabs.prototype.textToSpeechStream = async function({
         const similarityBoostValue = similarityBoost ? similarityBoost : 0;
         const styleValue = style ? style : 0;
 
+        try {
+            console.log("CALLING AXIOS: ")
         const response = await axios({
             method: "POST",
             url: voiceURL,
@@ -173,6 +181,9 @@ ElevenLabs.prototype.textToSpeechStream = async function({
         });
 
         return response.data;
+    } catch (err) {
+        console.log("ERROR IN AXIOS: ", err)
+    }
     } catch (error) {
         console.log(error);
     }
